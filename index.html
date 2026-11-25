@@ -19,46 +19,69 @@
   html, body { margin: 0; background: var(--natt); color: var(--snø); font-family: Inter, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
   body { min-height: 100svh; }
   button { font: inherit; color: inherit; }
-  .side { max-width: 440px; margin: 0 auto; padding: max(28px, env(safe-area-inset-top)) 20px max(24px, env(safe-area-inset-bottom)); min-height: 100svh; display: flex; flex-direction: column; gap: 22px; }
-  .overtittel { margin: 0; font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--gull); }
-  h1 { margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 36px; line-height: 1.05; font-weight: 700; }
-  .ingress { margin: 0; font-size: 15px; line-height: 1.45; color: var(--dempet); }
-  .topp { display: flex; flex-direction: column; gap: 6px; }
+  .side { position: relative; z-index: 1; max-width: 440px; margin: 0 auto; padding: max(28px, env(safe-area-inset-top)) 20px max(24px, env(safe-area-inset-bottom)); min-height: 100svh; display: flex; flex-direction: column; gap: 26px; }
+  .overtittel { margin: 0; font-size: 13px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--gull); }
+  h1 { margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 40px; line-height: 1.05; font-weight: 700; }
+  .ingress { margin: 0; font-size: 16px; line-height: 1.5; color: #DCE2EE; }
+  .topp { display: flex; flex-direction: column; gap: 10px; padding-bottom: 22px; border-bottom: 1px solid var(--strek); }
+  .topp .overtittel { display: flex; align-items: center; gap: 8px; }
+  .topp .overtittel::before { content: "✦"; color: var(--gull-lys); font-size: 14px; letter-spacing: 0; }
+
+  /* Juletema: snø i bakgrunnen og en rød/grønn julestripe øverst */
+  body::before { content: ""; position: fixed; left: 0; right: 0; top: 0; height: 6px; z-index: 2;
+    background: repeating-linear-gradient(90deg, var(--rød) 0 18px, var(--snø) 18px 24px, #2F6B4F 24px 42px, var(--snø) 42px 48px); }
+  .sno, .sno::after { position: fixed; inset: -100px 0 0; pointer-events: none; z-index: 0;
+    background-image: radial-gradient(2px 2px at 20px 30px, #fff, transparent), radial-gradient(1.5px 1.5px at 90px 120px, #fff, transparent),
+      radial-gradient(2.5px 2.5px at 160px 60px, #fff, transparent), radial-gradient(1.5px 1.5px at 230px 170px, #fff, transparent),
+      radial-gradient(2px 2px at 300px 90px, #fff, transparent), radial-gradient(1.5px 1.5px at 60px 190px, #fff, transparent);
+    background-size: 340px 220px; opacity: .35; animation: sno 22s linear infinite; }
+  .sno::after { content: ""; inset: -100px 0 0; background-size: 260px 300px; opacity: .6; animation-duration: 34s; }
+  @keyframes sno { to { transform: translateY(220px); } }
+
+  /* Seksjonsoverskrifter med strek for tydeligere struktur */
+  .seksjon-tittel { margin: 0 0 12px; display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--dempet); }
+  .seksjon-tittel::after { content: ""; flex: 1; height: 1px; background: var(--strek); }
 
   /* Stor polaroid for dagens bilde */
   .dagens { align-self: center; width: min(260px, 72vw); background: var(--snø); color: var(--natt); padding: 14px 14px 18px; border: 0; transform: rotate(-2deg); box-shadow: 0 0 0 4px rgba(232,176,75,.35), 0 18px 40px rgba(0,0,0,.5); cursor: pointer; display: flex; flex-direction: column; gap: 12px; transition: transform .2s; }
   .dagens:active { transform: rotate(-2deg) scale(.97); }
-  .dagens .flate { aspect-ratio: 1 / 0.9; background: #1C2A48; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: var(--snø); }
-  .dagens .tall { font-family: 'Bricolage Grotesque', sans-serif; font-size: 52px; font-weight: 700; color: var(--gull); line-height: 1; }
-  .dagens .hjelp { font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
-  .dagens .under { font-family: 'Bricolage Grotesque', sans-serif; font-size: 17px; font-weight: 700; text-align: center; }
-  .dagens.snudd .flate { background-size: cover; background-position: center; }
+  /* Uåpnet bilde ser ut som en innpakket gave med rødt bånd */
+  .dagens .flate { position: relative; aspect-ratio: 1 / 0.9; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: var(--snø);
+    background: linear-gradient(90deg, transparent calc(50% - 13px), var(--rød) calc(50% - 13px) calc(50% + 13px), transparent calc(50% + 13px)),
+                linear-gradient(0deg, transparent calc(50% - 13px), var(--rød) calc(50% - 13px) calc(50% + 13px), transparent calc(50% + 13px)), #1C3A2E; }
+  .dagens .tall { display: flex; align-items: center; justify-content: center; width: 84px; height: 84px; border-radius: 50%; background: var(--snø); box-shadow: 0 0 0 4px var(--gull), 0 6px 16px rgba(0,0,0,.4);
+    font-family: 'Bricolage Grotesque', sans-serif; font-size: 44px; font-weight: 700; color: var(--rød); line-height: 1; }
+  .dagens .hjelp { padding: 6px 12px; border-radius: 999px; background: var(--natt); font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+  .dagens .under { font-family: 'Bricolage Grotesque', sans-serif; font-size: 18px; font-weight: 700; text-align: center; }
+  .dagens.snudd .flate { background: #1C2A48 center / cover no-repeat; }
   .glod { animation: glod 2.4s ease-in-out infinite; }
   @keyframes glod { 50% { box-shadow: 0 0 0 6px rgba(232,176,75,.5), 0 18px 48px rgba(232,176,75,.25); } }
 
   /* Snorene */
-  .snorer { display: flex; flex-direction: column; gap: 6px; }
-  .snorer h2 { margin: 0 0 4px; font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--svak); }
-  .snor { position: relative; height: 84px; }
-  .snor::before { content: ""; position: absolute; left: -20px; right: -20px; top: 0; height: 26px; border-bottom: 2px solid var(--svak); border-radius: 0 0 50% 50%; opacity: .8; }
+  .snorer { display: flex; flex-direction: column; gap: 8px; }
+  .snor { position: relative; height: 88px; }
+  .snor::before { content: ""; position: absolute; left: -20px; right: -20px; top: 0; height: 26px; border-bottom: 2px solid #4E7A5E; border-radius: 0 0 50% 50%; }
   .rad { position: absolute; left: 0; right: 0; top: 14px; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; }
   .bilde { position: relative; justify-self: center; width: 100%; max-width: 54px; border: 0; padding: 4px 4px 11px; background: var(--snø); box-shadow: 0 4px 8px rgba(0,0,0,.35); cursor: pointer; }
-  .bilde::before { content: ""; position: absolute; left: 50%; top: -8px; width: 6px; height: 14px; margin-left: -3px; background: #C9953A; border-radius: 2px; }
-  .bilde .liten { aspect-ratio: 1; background: #B7CFB0 center / cover no-repeat; display: flex; align-items: center; justify-content: center; font-family: 'Bricolage Grotesque', sans-serif; font-size: 13px; font-weight: 700; color: var(--natt); }
+  /* Klypene er små julelys i rødt, gull og grønt */
+  .bilde::before { content: ""; position: absolute; left: 50%; top: -9px; width: 8px; height: 13px; margin-left: -4px; background: var(--rød); border-radius: 4px 4px 3px 3px; box-shadow: 0 0 8px var(--rød); }
+  .rad > :nth-child(3n+2)::before { background: var(--gull); box-shadow: 0 0 8px var(--gull); }
+  .rad > :nth-child(3n)::before { background: #3E9A6A; box-shadow: 0 0 8px #3E9A6A; }
+  .bilde .liten { aspect-ratio: 1; background: #B7CFB0 center / cover no-repeat; display: flex; align-items: center; justify-content: center; font-family: 'Bricolage Grotesque', sans-serif; font-size: 16px; font-weight: 700; color: var(--natt); }
   .bilde.i-dag { box-shadow: 0 0 0 3px var(--gull), 0 0 18px rgba(232,176,75,.6); }
   .bilde.i-dag .liten { background: var(--gull); }
-  .bilde.lukket { background: transparent; box-shadow: none; border: 1px dashed var(--strek); padding: 4px 4px 11px; cursor: default; }
-  .bilde.lukket .liten { background: transparent; color: var(--svak); font-weight: 500; }
-  .bilde.lukket::before { opacity: .5; }
+  .bilde.lukket { background: rgba(168,68,46,.14); box-shadow: none; border: 1px dashed #5A6B90; padding: 4px 4px 11px; cursor: default; }
+  .bilde.lukket .liten { background: transparent; color: var(--dempet); font-weight: 600; }
+  .bilde.lukket::before { opacity: .45; box-shadow: none; }
 
-  .bunn { margin-top: auto; display: flex; justify-content: space-between; font-size: 13px; color: var(--dempet); }
+  .bunn { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--strek); display: flex; justify-content: space-between; align-items: center; font-size: 14px; color: #DCE2EE; }
   .bunn strong { color: var(--gull); font-weight: 600; }
 
   /* Nedtelling */
   .nedtelling { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
-  .nedtelling div { background: var(--natt-2); border: 1px solid #2A3A5C; border-radius: 12px; padding: 14px 4px; text-align: center; }
-  .nedtelling b { display: block; font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; color: var(--gull); }
-  .nedtelling span { font-size: 12px; color: var(--dempet); }
+  .nedtelling div { background: var(--natt-2); border: 1px solid #2A3A5C; border-top: 3px solid var(--rød); border-radius: 12px; padding: 14px 4px; text-align: center; }
+  .nedtelling b { display: block; font-family: 'Bricolage Grotesque', sans-serif; font-size: 32px; color: var(--gull); }
+  .nedtelling span { font-size: 13px; font-weight: 500; color: #DCE2EE; }
 
   /* Dagvisning */
   .ark { position: fixed; inset: 0; background: rgba(8,14,28,.82); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); display: none; overflow-y: auto; z-index: 10; }
@@ -76,10 +99,11 @@
   .melding { margin: 0; font-size: 16px; line-height: 1.5; color: var(--snø); white-space: pre-line; animation: opp .5s .55s both; }
   .melding em { display: block; margin-top: 8px; font-style: normal; color: var(--gull); font-weight: 600; }
   @keyframes opp { from { transform: translateY(12px); opacity: 0; } }
-  @media (prefers-reduced-motion: reduce) { *, *::before { animation: none !important; transition: none !important; } }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
 </style>
 </head>
 <body>
+<div class="sno" aria-hidden="true"></div>
 <main class="side" id="app" aria-live="polite"></main>
 
 <div class="ark" id="ark" role="dialog" aria-modal="true" aria-labelledby="ark-tittel">
@@ -120,7 +144,7 @@
   function esc(s) { return String(s || '').replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
 
   function snorer(t) {
-    var html = '<section class="snorer" aria-label="Bildesnora"><h2>Snora</h2>';
+    var html = '<section class="snorer" aria-label="Bildesnora"><h2 class="seksjon-tittel">Snora</h2>';
     for (var r = 0; r < 4; r++) {
       html += '<div class="snor"><div class="rad">';
       for (var i = 0; i < 6; i++) {
@@ -172,9 +196,9 @@
     }
     app.innerHTML = '<header class="topp"><p class="overtittel">Desember 2026</p><h1>24 bilder av oss</h1>' +
       '<p class="ingress">Fra 1. desember henger det et nytt minne på snora hver dag, med et hint om hvor dagens sjokolade er gjemt.</p></header>' +
-      '<section aria-label="Tid til kalenderen åpner"><p class="overtittel" style="color:var(--dempet);margin-bottom:10px">Snora åpner om</p>' +
+      '<section aria-label="Tid til kalenderen åpner"><h2 class="seksjon-tittel">Snora åpner om</h2>' +
       '<div class="nedtelling"><div><b>–</b><span>dager</span></div><div><b>–</b><span>timer</span></div><div><b>–</b><span>min</span></div><div><b>–</b><span>sek</span></div></div></section>' +
-      snorer(1).replace(/class="bilde i-dag"[^>]*>/, 'class="bilde lukket">').replace('<h2>Snora</h2>', '<h2>Snora venter</h2>') +
+      snorer(1).replace(/class="bilde i-dag"[^>]*>/, 'class="bilde lukket">').replace('>Snora</h2>', '>Snora venter</h2>') +
       '<footer class="bunn"><span>Ses 1. desember</span><strong>Fra Roar</strong></footer>';
     oppdater();
     var tid = setInterval(oppdater, 1000);
