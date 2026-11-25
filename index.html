@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0F1B33">
+<meta name="robots" content="noindex, nofollow">
+<title>24 bilder av oss</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --natt: #0F1B33; --natt-2: #18264A; --strek: #3A4B70;
+    --snø: #F4EFE6; --dempet: #B9C2D6; --svak: #8E9AB5;
+    --gull: #E8B04B; --gull-lys: #F5CC7A; --rød: #A8442E;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--natt); color: var(--snø); font-family: Inter, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  body { min-height: 100svh; }
+  button { font: inherit; color: inherit; }
+  .side { max-width: 440px; margin: 0 auto; padding: max(28px, env(safe-area-inset-top)) 20px max(24px, env(safe-area-inset-bottom)); min-height: 100svh; display: flex; flex-direction: column; gap: 22px; }
+  .overtittel { margin: 0; font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--gull); }
+  h1 { margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 36px; line-height: 1.05; font-weight: 700; }
+  .ingress { margin: 0; font-size: 15px; line-height: 1.45; color: var(--dempet); }
+  .topp { display: flex; flex-direction: column; gap: 6px; }
+
+  /* Stor polaroid for dagens bilde */
+  .dagens { align-self: center; width: min(260px, 72vw); background: var(--snø); color: var(--natt); padding: 14px 14px 18px; border: 0; transform: rotate(-2deg); box-shadow: 0 0 0 4px rgba(232,176,75,.35), 0 18px 40px rgba(0,0,0,.5); cursor: pointer; display: flex; flex-direction: column; gap: 12px; transition: transform .2s; }
+  .dagens:active { transform: rotate(-2deg) scale(.97); }
+  .dagens .flate { aspect-ratio: 1 / 0.9; background: #1C2A48; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: var(--snø); }
+  .dagens .tall { font-family: 'Bricolage Grotesque', sans-serif; font-size: 52px; font-weight: 700; color: var(--gull); line-height: 1; }
+  .dagens .hjelp { font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+  .dagens .under { font-family: 'Bricolage Grotesque', sans-serif; font-size: 17px; font-weight: 700; text-align: center; }
+  .dagens.snudd .flate { background-size: cover; background-position: center; }
+  .glod { animation: glod 2.4s ease-in-out infinite; }
+  @keyframes glod { 50% { box-shadow: 0 0 0 6px rgba(232,176,75,.5), 0 18px 48px rgba(232,176,75,.25); } }
+
+  /* Snorene */
+  .snorer { display: flex; flex-direction: column; gap: 6px; }
+  .snorer h2 { margin: 0 0 4px; font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--svak); }
+  .snor { position: relative; height: 84px; }
+  .snor::before { content: ""; position: absolute; left: -20px; right: -20px; top: 0; height: 26px; border-bottom: 2px solid var(--svak); border-radius: 0 0 50% 50%; opacity: .8; }
+  .rad { position: absolute; left: 0; right: 0; top: 14px; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; }
+  .bilde { position: relative; justify-self: center; width: 100%; max-width: 54px; border: 0; padding: 4px 4px 11px; background: var(--snø); box-shadow: 0 4px 8px rgba(0,0,0,.35); cursor: pointer; }
+  .bilde::before { content: ""; position: absolute; left: 50%; top: -8px; width: 6px; height: 14px; margin-left: -3px; background: #C9953A; border-radius: 2px; }
+  .bilde .liten { aspect-ratio: 1; background: #B7CFB0 center / cover no-repeat; display: flex; align-items: center; justify-content: center; font-family: 'Bricolage Grotesque', sans-serif; font-size: 13px; font-weight: 700; color: var(--natt); }
+  .bilde.i-dag { box-shadow: 0 0 0 3px var(--gull), 0 0 18px rgba(232,176,75,.6); }
+  .bilde.i-dag .liten { background: var(--gull); }
+  .bilde.lukket { background: transparent; box-shadow: none; border: 1px dashed var(--strek); padding: 4px 4px 11px; cursor: default; }
+  .bilde.lukket .liten { background: transparent; color: var(--svak); font-weight: 500; }
+  .bilde.lukket::before { opacity: .5; }
+
+  .bunn { margin-top: auto; display: flex; justify-content: space-between; font-size: 13px; color: var(--dempet); }
+  .bunn strong { color: var(--gull); font-weight: 600; }
+
+  /* Nedtelling */
+  .nedtelling { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+  .nedtelling div { background: var(--natt-2); border: 1px solid #2A3A5C; border-radius: 12px; padding: 14px 4px; text-align: center; }
+  .nedtelling b { display: block; font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; color: var(--gull); }
+  .nedtelling span { font-size: 12px; color: var(--dempet); }
+
+  /* Dagvisning */
+  .ark { position: fixed; inset: 0; background: rgba(8,14,28,.82); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); display: none; overflow-y: auto; z-index: 10; }
+  .ark.apen { display: block; }
+  .ark-innhold { max-width: 440px; margin: 0 auto; padding: max(24px, env(safe-area-inset-top)) 20px 32px; display: flex; flex-direction: column; gap: 18px; }
+  .lukk { align-self: flex-end; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--strek); background: var(--natt-2); cursor: pointer; display: flex; align-items: center; justify-content: center; }
+  .stor { background: var(--snø); color: var(--natt); padding: 14px 14px 18px; transform: rotate(-1.5deg); box-shadow: 0 18px 40px rgba(0,0,0,.5); animation: inn .6s cubic-bezier(.2,.9,.3,1.2); }
+  @keyframes inn { from { transform: rotate(-14deg) translateY(-40px) scale(.85); opacity: 0; } }
+  .stor img, .stor .mangler { display: block; width: 100%; aspect-ratio: 1 / 0.9; object-fit: cover; background: #1C2A48; }
+  .stor .mangler { display: flex; align-items: center; justify-content: center; color: var(--dempet); font-size: 14px; text-align: center; padding: 20px; }
+  .stor p { margin: 12px 0 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 18px; font-weight: 700; text-align: center; }
+  .hint { background: var(--gull); color: var(--natt); border-radius: 14px; padding: 16px 18px; display: flex; flex-direction: column; gap: 6px; animation: opp .5s .35s both; }
+  .hint small { font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: #5A3B12; }
+  .hint b { font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; line-height: 1.25; }
+  .melding { margin: 0; font-size: 16px; line-height: 1.5; color: var(--snø); white-space: pre-line; animation: opp .5s .55s both; }
+  .melding em { display: block; margin-top: 8px; font-style: normal; color: var(--gull); font-weight: 600; }
+  @keyframes opp { from { transform: translateY(12px); opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { *, *::before { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+<main class="side" id="app" aria-live="polite"></main>
+
+<div class="ark" id="ark" role="dialog" aria-modal="true" aria-labelledby="ark-tittel">
+  <div class="ark-innhold">
+    <button class="lukk" id="lukk" aria-label="Lukk og gå tilbake til snora">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <p class="overtittel" id="ark-tittel"></p>
+    <div class="stor" id="stor"></div>
+    <div class="hint" id="hint"></div>
+    <p class="melding" id="melding"></p>
+  </div>
+</div>
+
+<script src="dager.js"></script>
+<script>
+(function () {
+  var AAR = 2026;
+  var dager = window.DAGER || [];
+  var app = document.getElementById('app');
+  var ark = document.getElementById('ark');
+
+  // Forhåndsvisning for Roar: legg ?dag=6 bak adressen for å se en bestemt dag
+  // (?dag=0 viser nedtellingen).
+  var test = new URLSearchParams(location.search).get('dag');
+
+  function iDag() {
+    if (test !== null) return Math.max(0, Math.min(25, parseInt(test, 10) || 0));
+    var n = new Date();
+    if (n.getFullYear() > AAR || (n.getFullYear() === AAR && n.getMonth() === 11 && n.getDate() > 24)) return 25;
+    if (n.getFullYear() === AAR && n.getMonth() === 11) return n.getDate();
+    return 0; // før 1. desember
+  }
+
+  function lagre(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  function hent(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+
+  function esc(s) { return String(s || '').replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+
+  function snorer(t) {
+    var html = '<section class="snorer" aria-label="Bildesnora"><h2>Snora</h2>';
+    for (var r = 0; r < 4; r++) {
+      html += '<div class="snor"><div class="rad">';
+      for (var i = 0; i < 6; i++) {
+        var n = r * 6 + i + 1, d = dager[n - 1] || {}, rot = ((n * 37) % 11) - 5;
+        if (n < t || (n === t && hent('apnet-' + n))) {
+          html += '<button class="bilde" style="transform:rotate(' + rot + 'deg)" data-dag="' + n + '" aria-label="Se bilde ' + n + ' igjen">' +
+                  '<div class="liten" style="background-image:url(\'' + esc(d.bilde) + '\')"></div></button>';
+        } else if (n === t) {
+          html += '<button class="bilde i-dag" style="transform:rotate(' + rot + 'deg)" data-dag="' + n + '" aria-label="Åpne dagens bilde, nummer ' + n + '"><div class="liten">' + n + '</div></button>';
+        } else {
+          html += '<span class="bilde lukket" aria-label="Bilde ' + n + ', kommer ' + n + '. desember"><span class="liten" style="display:flex">' + n + '</span></span>';
+        }
+      }
+      html += '</div></div>';
+    }
+    return html + '</section>';
+  }
+
+  function tegn() {
+    var t = iDag();
+    if (t === 0) return tegnNedtelling();
+    var ferdig = t === 25, apnet = !ferdig && hent('apnet-' + t);
+    var igjen = ferdig ? 0 : 24 - t;
+    var html = '<header class="topp"><p class="overtittel">' + (ferdig ? 'God jul' : t + '. desember') + '</p>' +
+      '<h1>24 bilder av oss</h1>' +
+      '<p class="ingress">' + (ferdig ? 'Snora er full. God jul, Kine.' : 'Et nytt minne henger på snora hver dag. Bak hvert bilde ligger et hint om hvor dagens sjokolade er gjemt.') + '</p></header>';
+    if (!ferdig) {
+      var d = dager[t - 1] || {};
+      html += '<button class="dagens ' + (apnet ? 'snudd' : 'glod') + '" data-dag="' + t + '" aria-label="' + (apnet ? 'Se dagens bilde igjen' : 'Snu dagens bilde') + '">' +
+        (apnet
+          ? '<div class="flate" style="background-image:url(\'' + esc(d.bilde) + '\')"></div><span class="under">' + (esc(d.tekst) || 'Dagens bilde') + '</span>'
+          : '<div class="flate"><span class="tall">' + t + '</span><span class="hjelp">Trykk for å snu</span></div><span class="under">Dagens bilde</span>') +
+        '</button>';
+    }
+    html += snorer(ferdig ? 25 : t);
+    html += '<footer class="bunn"><span>' + (ferdig ? '24 minner' : (t - 1 + (apnet ? 1 : 0)) + ' minner · ' + igjen + ' igjen') + '</span><strong>Fra Roar</strong></footer>';
+    app.innerHTML = html;
+  }
+
+  function tegnNedtelling() {
+    var mål = new Date(AAR, 11, 1, 0, 0, 0);
+    function oppdater() {
+      var ms = Math.max(0, mål - new Date());
+      if (ms === 0 && test === null) { clearInterval(tid); return tegn(); }
+      var s = Math.floor(ms / 1000);
+      var del = [Math.floor(s / 86400), Math.floor(s % 86400 / 3600), Math.floor(s % 3600 / 60), s % 60];
+      var celler = document.querySelectorAll('.nedtelling b');
+      for (var i = 0; i < 4; i++) if (celler[i]) celler[i].textContent = del[i];
+    }
+    app.innerHTML = '<header class="topp"><p class="overtittel">Desember 2026</p><h1>24 bilder av oss</h1>' +
+      '<p class="ingress">Fra 1. desember henger det et nytt minne på snora hver dag, med et hint om hvor dagens sjokolade er gjemt.</p></header>' +
+      '<section aria-label="Tid til kalenderen åpner"><p class="overtittel" style="color:var(--dempet);margin-bottom:10px">Snora åpner om</p>' +
+      '<div class="nedtelling"><div><b>–</b><span>dager</span></div><div><b>–</b><span>timer</span></div><div><b>–</b><span>min</span></div><div><b>–</b><span>sek</span></div></div></section>' +
+      snorer(1).replace(/class="bilde i-dag"[^>]*>/, 'class="bilde lukket">').replace('<h2>Snora</h2>', '<h2>Snora venter</h2>') +
+      '<footer class="bunn"><span>Ses 1. desember</span><strong>Fra Roar</strong></footer>';
+    oppdater();
+    var tid = setInterval(oppdater, 1000);
+  }
+
+  function apne(n) {
+    var d = dager[n - 1] || {};
+    lagre('apnet-' + n, '1');
+    document.getElementById('ark-tittel').textContent = n + '. desember';
+    var stor = document.getElementById('stor');
+    stor.innerHTML = '<div class="mangler">Bildet kommer snart.</div><p>' + (esc(d.tekst) || 'Et minne for i dag') + '</p>';
+    if (d.bilde) {
+      var img = new Image();
+      img.alt = d.tekst || 'Bilde for ' + n + '. desember';
+      img.onload = function () { var m = stor.querySelector('.mangler'); if (m) m.replaceWith(img); };
+      img.src = d.bilde;
+    }
+    document.getElementById('hint').innerHTML = '<small>Dagens sjokolade</small><b>' + (esc(d.hint) || 'Roar gjemmer den akkurat nå. Prøv igjen litt senere.') + '</b>';
+    document.getElementById('melding').innerHTML = d.melding ? esc(d.melding) + '<em>– Roar</em>' : '';
+    // Start animasjonene på nytt
+    ark.querySelectorAll('.stor, .hint, .melding').forEach(function (el) { el.style.animation = 'none'; el.offsetHeight; el.style.animation = ''; });
+    ark.classList.add('apen');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('lukk').focus();
+  }
+
+  function lukk() { ark.classList.remove('apen'); document.body.style.overflow = ''; tegn(); }
+
+  app.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-dag]');
+    if (b) apne(parseInt(b.getAttribute('data-dag'), 10));
+  });
+  document.getElementById('lukk').addEventListener('click', lukk);
+  ark.addEventListener('click', function (e) { if (e.target === ark) lukk(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && ark.classList.contains('apen')) lukk(); });
+
+  tegn();
+})();
+</script>
+</body>
+</html>
