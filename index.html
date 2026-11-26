@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0F1B33">
 <meta name="robots" content="noindex, nofollow">
-<title>24 bilder av oss</title>
+<title>Kines Adventskalender</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,400;1,9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
     --natt: #0F1B33; --natt-2: #18264A; --strek: #3A4B70;
@@ -21,7 +21,9 @@
   button { font: inherit; color: inherit; }
   .side { position: relative; z-index: 1; max-width: 440px; margin: 0 auto; padding: max(28px, env(safe-area-inset-top)) 20px max(24px, env(safe-area-inset-bottom)); min-height: 100svh; display: flex; flex-direction: column; gap: 26px; }
   .overtittel { margin: 0; font-size: 13px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--gull); }
-  h1 { margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 40px; line-height: 1.05; font-weight: 700; }
+  h1 { margin: 0; font-family: Fraunces, Georgia, serif; font-size: 42px; line-height: 1.02; font-weight: 600; letter-spacing: -.01em; }
+  h1 .navn { display: block; font-style: italic; color: var(--gull-lys); font-size: .82em; }
+  .undertittel { margin: 0 0 2px; font-family: Fraunces, Georgia, serif; font-style: italic; font-size: 19px; font-weight: 400; color: var(--dempet); }
   .ingress { margin: 0; font-size: 16px; line-height: 1.5; color: #DCE2EE; }
   .topp { display: flex; flex-direction: column; gap: 10px; padding-bottom: 22px; border-bottom: 1px solid var(--strek); }
   .topp .overtittel { display: flex; align-items: center; gap: 8px; }
@@ -50,9 +52,9 @@
     background: linear-gradient(90deg, transparent calc(50% - 13px), var(--rød) calc(50% - 13px) calc(50% + 13px), transparent calc(50% + 13px)),
                 linear-gradient(0deg, transparent calc(50% - 13px), var(--rød) calc(50% - 13px) calc(50% + 13px), transparent calc(50% + 13px)), #1C3A2E; }
   .dagens .tall { display: flex; align-items: center; justify-content: center; width: 84px; height: 84px; border-radius: 50%; background: var(--snø); box-shadow: 0 0 0 4px var(--gull), 0 6px 16px rgba(0,0,0,.4);
-    font-family: 'Bricolage Grotesque', sans-serif; font-size: 44px; font-weight: 700; color: var(--rød); line-height: 1; }
+    font-family: Fraunces, Georgia, serif; font-size: 44px; font-weight: 600; color: var(--rød); line-height: 1; }
   .dagens .hjelp { padding: 6px 12px; border-radius: 999px; background: var(--natt); font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
-  .dagens .under { font-family: 'Bricolage Grotesque', sans-serif; font-size: 18px; font-weight: 700; text-align: center; }
+  .dagens .under { font-family: Fraunces, Georgia, serif; font-style: italic; font-size: 20px; font-weight: 600; text-align: center; }
   .dagens.snudd .flate { background: #1C2A48 center / cover no-repeat; }
   .glod { animation: glod 2.4s ease-in-out infinite; }
   @keyframes glod { 50% { box-shadow: 0 0 0 6px rgba(232,176,75,.5), 0 18px 48px rgba(232,176,75,.25); } }
@@ -169,7 +171,7 @@
     var ferdig = t === 25, apnet = !ferdig && hent('apnet-' + t);
     var igjen = ferdig ? 0 : 24 - t;
     var html = '<header class="topp"><p class="overtittel">' + (ferdig ? 'God jul' : t + '. desember') + '</p>' +
-      '<h1>24 bilder av oss</h1>' +
+      '<h1><span class="navn">Kines</span> Adventskalender</h1><p class="undertittel">24 minner med påfølgende sjokolade</p>' +
       '<p class="ingress">' + (ferdig ? 'Snora er full. God jul, Kine.' : 'Et nytt minne henger på snora hver dag. Bak hvert bilde ligger et hint om hvor dagens sjokolade er gjemt.') + '</p></header>';
     if (!ferdig) {
       var d = dager[t - 1] || {};
@@ -194,7 +196,7 @@
       var celler = document.querySelectorAll('.nedtelling b');
       for (var i = 0; i < 4; i++) if (celler[i]) celler[i].textContent = del[i];
     }
-    app.innerHTML = '<header class="topp"><p class="overtittel">Desember 2026</p><h1>24 bilder av oss</h1>' +
+    app.innerHTML = '<header class="topp"><p class="overtittel">Desember 2026</p><h1><span class="navn">Kines</span> Adventskalender</h1><p class="undertittel">24 minner med påfølgende sjokolade</p>' +
       '<p class="ingress">Fra 1. desember henger det et nytt minne på snora hver dag, med et hint om hvor dagens sjokolade er gjemt.</p></header>' +
       '<section aria-label="Tid til kalenderen åpner"><h2 class="seksjon-tittel">Snora åpner om</h2>' +
       '<div class="nedtelling"><div><b>–</b><span>dager</span></div><div><b>–</b><span>timer</span></div><div><b>–</b><span>min</span></div><div><b>–</b><span>sek</span></div></div></section>' +
